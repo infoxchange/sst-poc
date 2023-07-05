@@ -4,7 +4,7 @@ import {NextResponse} from "next/server";
 export async function POST(request: Request) {
     // only allow application/json content-type
     if (request.headers.get('content-type') !== 'application/json') {
-        return NextResponse.next({status: 400, statusText: 'Bad Request: Content-Type must be application/json'});
+        return NextResponse.json(null, {status: 400, statusText: 'Bad Request: Content-Type must be application/json'});
     }
 
     try {
@@ -22,12 +22,12 @@ export async function POST(request: Request) {
             });
 
             // return the newly created message
-            return NextResponse.json({message}, {status: 201});
+            return NextResponse.json({message}, {status: 201, statusText: 'Message created.'});
         } else {
-            return NextResponse.next({status: 400, statusText: 'Bad Request: Required fields not provided. Message not created.'});
+            return NextResponse.json(null, {status: 400, statusText: 'Bad Request: Required fields not provided. Message not created.'});
         }
     } catch (error) {
         console.error("Error occurred while creating message:", error);
-        return NextResponse.next({status: 500, statusText: 'An error occurred while creating the message.'});
+        return NextResponse.json(null, {status: 500, statusText: 'An error occurred while creating the message.'});
     }
 }

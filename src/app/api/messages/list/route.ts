@@ -7,11 +7,7 @@ export async function GET() {
         return NextResponse.json({messages});
     } catch (error) {
         console.error("Error occurred while fetching messages:", error);
-        //return nextresponse with 500 error
-        return NextResponse.next({
-            status: 500,
-            statusText: 'An error occurred while fetching messages.'
-        });
+        return NextResponse.json(null, {status: 500, statusText: 'An error occurred while fetching messages.'});
     } finally {
         await prisma.$disconnect();
     }
