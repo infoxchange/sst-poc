@@ -1,7 +1,9 @@
 import prisma from '@/lib/prisma/client';
 import {NextResponse} from "next/server";
+import { revalidatePath } from 'next/cache'
 
 export async function POST(request: Request) {
+    console.log("test cake")
     // only allow application/json content-type
     if (request.headers.get('content-type') !== 'application/json') {
         return NextResponse.json(null, {status: 400, statusText: 'Bad Request: Content-Type must be application/json'});
@@ -20,6 +22,8 @@ export async function POST(request: Request) {
                     content: content,
                 },
             });
+
+            revalidatePath("/")
 
             // return the newly created message
             return NextResponse.json({message}, {status: 201, statusText: 'Message created.'});

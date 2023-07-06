@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ask-izzy-dev
+      POSTGRES_PASSWORD: X40qKpxIN7S7resKbS3e
+      POSTGRES_DB: ask-izzy-dev
+    ports:
+      - 5432:5432
