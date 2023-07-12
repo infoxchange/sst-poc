@@ -16,6 +16,11 @@
 /.next/
 /out/
 
+# sst
+.sst
+.open-next
+cdk.context.json
+
 # production
 /build
 

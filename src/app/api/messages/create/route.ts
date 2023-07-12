@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma/client';
 import {NextResponse} from "next/server";
+import {revalidatePath} from "next/cache";
 
 export async function POST(request: Request) {
     // only allow application/json content-type
@@ -14,15 +15,22 @@ export async function POST(request: Request) {
         // validate the request body
         if (title && content) {
             // create a new message
-            const message = await prisma.message.create({
-                data: {
-                    title: title,
-                    content: content,
-                },
-            });
+            try {
+                const message = await prisma.message.create({
+                    data: {
+                        title: title,
+                        content: content,
+                    },
+                });
 
-            // return the newly created message
-            return NextResponse.json({message}, {status: 201, statusText: 'Message created.'});
+                await revalidatePath('/');
+
+                // return the newly created message
+                return NextResponse.json({message}, {status: 201, statusText: 'Message created.'});
+            } catch (e) {
+                console.error("Error occurred while creating message:", e);
+                return NextResponse.json(null, {status: 500, statusText: 'An error occurred while creating the message.'});
+            }
         } else {
             return NextResponse.json(null, {status: 400, statusText: 'Bad Request: Required fields not provided. Message not created.'});
         }
