@@ -9,7 +9,7 @@ import { Vpc, SubnetType } from "aws-cdk-lib/aws-ec2";
 export default {
   config(_input) {
     return {
-      name: "sstpoc",
+      name: "sst-poc",
       region: "ap-southeast-2",
     };
   },
@@ -31,13 +31,13 @@ export default {
             vpcSubnets,
           }
         },
-        customDomain: {
-          domainName: "sst-poc.cals.cafe",
-          isExternalDomain: true,
-          cdk: {
-            certificate: Certificate.fromCertificateArn(stack, "MyCert", "arn:aws:acm:us-east-1:228636184609:certificate/2ea84b6a-ef7d-41c0-83e6-94970b545bc1"),
-          },
-        },
+        // customDomain: {
+        //   domainName: "sst-poc.cals.cafe",
+        //   isExternalDomain: true,
+        //   cdk: {
+        //     certificate: Certificate.fromCertificateArn(stack, "MyCert", "arn:aws:acm:us-east-1:228636184609:certificate/2ea84b6a-ef7d-41c0-83e6-94970b545bc1"),
+        //   },
+        // },
       });
 
       stack.addOutputs({
