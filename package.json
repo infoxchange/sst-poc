@@ -25,10 +25,10 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "aws-cdk-lib": "2.84.0",
-    "constructs": "10.1.156",
+    "aws-cdk-lib": "2.110.1",
+    "constructs": "10.3.0",
     "global-agent": "^3.0.0",
     "prisma": "^4.13.0",
-    "sst": "^2.19.0"
+    "sst": "^2.38.7"
   }
 }

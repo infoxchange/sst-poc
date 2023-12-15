@@ -15,6 +15,7 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      console.log(stack)
 
       const vpc = Vpc.fromLookup(stack, "myVPC", { vpcId: "vpc-0449d00f66f3c503d" });
       const vpcSubnets = {
